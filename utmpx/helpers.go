@@ -3,15 +3,18 @@ package utmpx
 // #include <utmpx.h>
 import "C"
 import (
-	"fmt"
 	"time"
 )
 
 func (e *Entry) String() string {
-	return fmt.Sprintf(
-		"Type: '%d %s', PID: '%d', Line: '%s', ID: '%s', User: '%s', Host: '%s', Session: '%d', Timestamp: '%s'",
-		e.Type, e.TypeStr, e.PID, e.Line, e.ID, e.User, e.Host, e.SessionID, e.Timestamp,
-	)
+	return "Type: '" + string(e.Type) + " " + e.TypeStr + "'" +
+		"PID: " + string(e.PID) +
+		"Line: " + e.Line +
+		"ID: " + e.ID +
+		"User: " + e.User +
+		"Host: " + e.Host +
+		" Session: " + string(e.SessionID) +
+		" Timestamp: " + e.Timestamp.String()
 }
 
 func next() (entry *Entry) {
