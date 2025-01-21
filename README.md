@@ -10,25 +10,11 @@
 
 ## Installation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/drunkleen/gusers.git
-   ```
+You can install `gusers` using the `go install` command:
 
-2. Navigate to the project directory:
-   ```bash
-   cd gusers
-   ```
-
-3. Build the binary:
-   ```bash
-   go build -o bin/gusers
-   ```
-
-4. (Optional) Install the binary globally:
-   ```bash
-   sudo mv bin/gusers /usr/local/bin/
-   ```
+```bash
+go install github.com/drunkleen/gusers@latest
+```
 
 ## Usage
 
@@ -51,6 +37,11 @@ user1 user2 user3
 ### Library Usage
 
 You can also use the `utmpx` library in your Go projects to interact with `utmpx` files.
+
+#### Install the library using `go get`:
+```bash
+go get github.com/drunkleen/gusers/utmpx
+```
 
 #### Example:
 ```go
@@ -100,7 +91,16 @@ func main() {
 ### Build Instructions
 
 1. Ensure Go is installed on your system.
-2. Run the following command to build the application:
+
+2. Clone the repository:
+   ```bash
+   git clone https://github.com/drunkleen/gusers.git
+   ```
+3. Navigate to the project directory:
+   ```bash
+   cd gusers
+   ```
+4. Run the following command to build the application:
    ```bash
    go build -o bin/gusers
    ```
