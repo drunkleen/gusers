@@ -35,6 +35,7 @@ var Types = map[int]string{
 	UserProcess:  "user process",
 }
 
+// Entry represents a utmpx entry.
 type Entry struct {
 	ID        string    `json:"id"`
 	Host      string    `json:"host"`

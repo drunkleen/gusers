@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// String returns a human-readable string representation of the Entry.
 func (e *Entry) String() string {
 	return "Type: '" + string(e.Type) + " " + e.TypeStr + "'" +
 		"PID: " + string(e.PID) +
@@ -17,6 +18,7 @@ func (e *Entry) String() string {
 		" Timestamp: " + e.Timestamp.String()
 }
 
+// next returns the next entry in the utmpx database.
 func next() (entry *Entry) {
 	centry := C.getutxent()
 	if centry == nil {

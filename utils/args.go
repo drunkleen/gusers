@@ -2,6 +2,9 @@ package utils
 
 import "os"
 
+// ParseArgsAndExitIfNeeded parses the arguments and exits if it encounters
+// --help or --version. If there are more than two arguments, it prints an
+// error message and exits with status 1.
 func ParseArgsAndExitIfNeeded(args []string) {
 	if len(args) <= 1 || args[1] == "--" {
 		return
@@ -20,6 +23,9 @@ func ParseArgsAndExitIfNeeded(args []string) {
 	os.Exit(0)
 }
 
+// findInArgs iterates through args and checks if argSign or argSign2
+// exist in the list. If either is found, the run function is executed
+// and the program exits with status 1.
 func findInArgs(args []string, argSign, argSign2 string, run func()) {
 	for _, arg := range args {
 		if arg == argSign || arg == argSign2 {
@@ -29,6 +35,33 @@ func findInArgs(args []string, argSign, argSign2 string, run func()) {
 	}
 }
 
+// printTag takes a single arg string and writes an error message to
+// os.Stdout and exits with a non-zero status if the arg is invalid.
+// It checks if the arg is a short option (single character) or a long
+// option (multiple characters) and writes the appropriate error
+// message.
+func printTag(arg string) {
+	if len(arg) > 2 {
+		return
+	}
+	if arg[0] == '-' {
+		os.Stdout.Write([]byte(
+			"users: invalid option -- '" + arg[1:] + "'\n" +
+				"Try 'users --help' for more information.\n",
+		))
+		return
+	}
+	if arg[:2] == "--" {
+		os.Stdout.Write([]byte(
+			"users: unrecognized option '" + arg + "'\n" +
+				"Try 'users --help' for more information.\n",
+		))
+	}
+}
+
+// printVersion writes the version information for the users command to os.Stdout.
+// It includes the version number, copyright information, license information,
+// and the name of the author.
 func printVersion() {
 	os.Stdout.Write([]byte(
 		"gusers v0.1" +
@@ -40,28 +73,9 @@ func printVersion() {
 	))
 }
 
-func printTag(arg string) {
-
-	if len(arg) > 2 {
-		return
-	}
-
-	if arg[0] == '-' {
-		os.Stdout.Write([]byte(
-			"users: invalid option -- '" + arg[1:] + "'\n" +
-				"Try 'users --help' for more information.\n",
-		))
-		return
-	}
-
-	if arg[:2] == "--" {
-		os.Stdout.Write([]byte(
-			"users: unrecognized option '" + arg + "'\n" +
-				"Try 'users --help' for more information.\n",
-		))
-	}
-}
-
+// printHelp writes the help message for the users command to os.Stdout.
+// It describes the usage, options, and provides links to the online
+// documentation and the local GNU info page.
 func printHelp() {
 	os.Stdout.Write([]byte(
 		"Usage: users [OPTION]... [FILE]\n" +

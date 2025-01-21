@@ -7,6 +7,10 @@ import (
 	"github.com/drunkleen/gusers/utmpx"
 )
 
+// main is the entry point for the gusers application. It parses command-line
+// arguments, retrieves all logged-in user entries from the utmpx database, filters
+// entries to include only those from pseudo-terminals ("pts/"), and outputs the
+// usernames of these sessions to standard output.
 func main() {
 	utils.ParseArgsAndExitIfNeeded(os.Args)
 
